@@ -9,27 +9,33 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsViewHolder> {
 
-    private final ArrayList<String> mFriendsList;
+    private final ArrayList<FriendsData> friendsData;
     private LayoutInflater mInflater;
 
-    public FriendsAdapter(Context context, ArrayList<String> mFriendsList) {
-        this.mFriendsList = mFriendsList;
+    public FriendsAdapter(Context context, ArrayList<FriendsData> friendsData) {
+        this.friendsData = friendsData;
         this.mInflater = LayoutInflater.from(context);
     }
 
     class FriendsViewHolder extends RecyclerView.ViewHolder {
         public final TextView friendItemview;
+        public final CircleImageView imageView;
         final FriendsAdapter mAdapter;
 
 
         public FriendsViewHolder(View itemView, FriendsAdapter adapter){
             super(itemView);
             friendItemview = itemView.findViewById(R.id.tvitem);
+            imageView = itemView.findViewById(R.id.imageView);
             this.mAdapter = adapter;
         }
     }
@@ -46,12 +52,14 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
 
     @Override
     public void onBindViewHolder(@NonNull FriendsAdapter.FriendsViewHolder holder, int position) {
-        String mCurrent = mFriendsList.get(position);
+        String mCurrent = friendsData.get(position).getName();
         holder.friendItemview.setText(mCurrent);
+        String mUrl = friendsData.get(position).getUrl();
+        Picasso.get().load(friendsData.get(position).getUrl()).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return mFriendsList.size();
+        return friendsData.size();
     }
 }
