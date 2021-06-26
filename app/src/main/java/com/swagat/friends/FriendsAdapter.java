@@ -1,6 +1,7 @@
 package com.swagat.friends;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,22 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
         String mName = friendsData.get(position).getName();
         holder.friendItemview.setText(mName);
         String mUrl = friendsData.get(position).getUrl();
+
+        //using picasso to load img from url
         Picasso.get().load(friendsData.get(position).getUrl()).into(holder.imageView);
+
+        holder.friendItemview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //starting a new activity with intent
+                Intent intent1 = new Intent(mInflater.getContext(),FriendsDetails.class);
+                intent1.putExtra("name",mName);
+                intent1.putExtra("imgUrl", mUrl);
+                mInflater.getContext().startActivity(intent1);
+
+            }
+        });
     }
 
     @Override
