@@ -52,8 +52,8 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
 
     @Override
     public void onBindViewHolder(@NonNull FriendsAdapter.FriendsViewHolder holder, int position) {
-        String mCurrent = friendsData.get(position).getName();
-        holder.friendItemview.setText(mCurrent);
+        String mName = friendsData.get(position).getName();
+        holder.friendItemview.setText(mName);
         String mUrl = friendsData.get(position).getUrl();
         Picasso.get().load(friendsData.get(position).getUrl()).into(holder.imageView);
     }
