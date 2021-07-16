@@ -60,6 +60,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
         //using picasso to load img from url
         Picasso.get().load(friendsData.get(position).getUrl()).into(holder.imageView);
 
+        //add click listener
         holder.friendItemview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
